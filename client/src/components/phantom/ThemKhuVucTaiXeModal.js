@@ -41,13 +41,19 @@ const ThemKhuVucTaiXeModal = () => {
                 </Modal.Header>
                 <Form onSubmit={onSubmit}>
                     <Modal.Body>
-                        Danh sách khu vực đã đăng ký
-                        <Row className="my-3">
-                            {DSKhuVuc.map((item, index) => (
-                                <Col xs={6} key={index}>
-                                    {item.MaKVuc}
-                                </Col>
-                            ))}
+                        <Row className="mb-2">
+                            {DSKhuVuc.length !== 0 ? (
+                                <>
+                                    <span>Danh sách khu vực đã đăng ký</span>
+                                    {DSKhuVuc.map((item, index) => (
+                                        <Col xs={6} key={index}>
+                                            {item.MaKVuc}
+                                        </Col>
+                                    ))}
+                                </>
+                            ) : (
+                                <span>Chưa đăng ký khu vực</span>
+                            )}
                         </Row>
                         <Form.Group>
                             <Form.Control
