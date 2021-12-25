@@ -12,6 +12,11 @@ const Home = () => {
                         Lost update
                     </Button>
                 </Col>
+                <Col>
+                    <Button size="lg" onClick={() => navigate('/phantom')}>
+                        Phantom
+                    </Button>
+                </Col>
             </Row>
         </Container>
     )

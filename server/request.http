@@ -40,3 +40,47 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/api/hop-dong
+
+
+
+#######################'
+
+###
+GET http://localhost:5000/api/phantom/home
+Content-Type: application/json
+
+{
+    "Name": "Phạm Minh Trí"
+}
+
+
+###
+POST http://localhost:5000/api/phantom/home
+Content-Type: application/json
+
+{
+	"MaDHang": 4,
+    "MaHHoa": 1, 
+	"Soluong": 5
+}
+
+###
+PUT
+
+### 
+DELETE http://localhost:5000/api/phantom/xoa-tai-xe/4
+
+
+###
+POST http://localhost:5000/api/phantom/taixe-them-khuvuc
+Content-Type: application/json
+
+{
+	"MaTXe": 4,
+    "MaKVuc": 1 
+}
+
+
+
+
+

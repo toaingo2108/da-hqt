@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const sql = require('mssql')
-const { pool } = require('../config')
 const config = require('../config')
 
 // @route GET api/hop-dong
