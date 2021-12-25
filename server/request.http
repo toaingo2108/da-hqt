@@ -1,0 +1,42 @@
+PUT http://localhost:5000/api/hop-dong
+Content-Type: application/json
+
+{
+    "MaHDong": 1,
+    "CmndNguoiDDHDong": "251198073",
+    "SoThangGiaHan": 3
+}
+
+
+###
+PUT http://localhost:5000/api/hop-dong
+Content-Type: application/json
+
+{
+    "MaHDong": 1,
+    "CmndNguoiDDHDong": "251198073",
+    "SoThangGiaHan": 1
+}
+
+###
+PUT http://localhost:5000/api/hop-dong-error
+Content-Type: application/json
+
+{
+    "MaHDong": 1,
+    "CmndNguoiDDHDong": "251198073",
+    "SoThangGiaHan": 1
+}
+
+###
+PUT http://localhost:5000/api/hop-dong-error
+Content-Type: application/json
+
+{
+    "MaHDong": 1,
+    "CmndNguoiDDHDong": "251198073",
+    "SoThangGiaHan": 3
+}
+
+###
+GET http://localhost:5000/api/hop-dong
