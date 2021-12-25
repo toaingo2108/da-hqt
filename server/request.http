@@ -46,12 +46,10 @@ GET http://localhost:5000/api/hop-dong
 #######################'
 
 ###
-GET http://localhost:5000/api/phantom/home
+GET http://localhost:5000/api/phantom/taixe-khuvuc/8
 Content-Type: application/json
 
-{
-    "Name": "Phạm Minh Trí"
-}
+
 
 
 ###
