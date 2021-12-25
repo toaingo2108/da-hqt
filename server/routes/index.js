@@ -30,13 +30,18 @@ router.put('/hop-dong', async (req, res) => {
     const { MaHDong, CmndNguoiDDHDong, SoThangGiaHan } = req.body
     try {
         let pool = await sql.connect(config)
-        await pool
+        const response = await pool
             .request()
             .input('MaHDong', sql.Int, MaHDong)
             .input('CmndNguoiDDHDong', sql.VarChar(15), CmndNguoiDDHDong)
             .input('SoThangGiaHan', sql.Int, SoThangGiaHan)
             .execute('USP_GiaHanHopDong')
-
+        if (response.returnValue) {
+            return res.status(400).json({
+                success: false,
+                message: 'Thất bại',
+            })
+        }
         let updatedHopDong = await pool
             .request()
             .query(`select * from HOPDONG where MaHDong = ${MaHDong}`)
@@ -62,13 +67,18 @@ router.put('/hop-dong-error', async (req, res) => {
     const { MaHDong, CmndNguoiDDHDong, SoThangGiaHan } = req.body
     try {
         let pool = await sql.connect(config)
-        await pool
+        const response = await pool
             .request()
             .input('MaHDong', sql.Int, MaHDong)
             .input('CmndNguoiDDHDong', sql.VarChar(15), CmndNguoiDDHDong)
             .input('SoThangGiaHan', sql.Int, SoThangGiaHan)
             .execute('USP_GiaHanHopDong_error')
-
+        if (response.returnValue) {
+            return res.status(400).json({
+                success: false,
+                message: 'Thất bại',
+            })
+        }
         let updatedHopDong = await pool
             .request()
             .query(`select * from HOPDONG where MaHDong = ${MaHDong}`)

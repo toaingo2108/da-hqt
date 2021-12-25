@@ -4,6 +4,23 @@ const router = express.Router()
 const sql = require('mssql')
 const config = require('../config')
 
+router.get('/tai-xe', async (req, res) => {
+    try {
+        let pool = await sql.connect(config)
+        const DSTaiXe = await pool.request().query('select * from TAIXE')
+        res.json({
+            success: true,
+            DSTaiXe: DSTaiXe.recordset,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            message: 'Lỗi hệ thống',
+        })
+    }
+})
+
 router.delete('/xoa-tai-xe/:MaTXe', async (req, res) => {
     const MaTXe = req.params.MaTXe
     try {
@@ -14,8 +31,9 @@ router.delete('/xoa-tai-xe/:MaTXe', async (req, res) => {
 
         const response = await pool
             .request()
-            .input('MaTXe', sql.Int, MaTXe)
-            .execute('sp_XoaTaiXe')
+            .query(`delete TAIXE where MaTXe = ${MaTXe}`)
+        // .input('MaTXe', sql.Int, MaTXe)
+        // .execute('sp_XoaTaiXe')
         if (response.returnValue) {
             res.status(400).json({
                 success: false,
@@ -29,7 +47,7 @@ router.delete('/xoa-tai-xe/:MaTXe', async (req, res) => {
             })
         }
     } catch (error) {
-        console.log(error)
+        console.log(error.message)
         res.status(500).json({
             success: false,
             message: 'Lỗi hệ thống',

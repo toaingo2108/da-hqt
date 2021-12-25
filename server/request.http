@@ -80,6 +80,9 @@ Content-Type: application/json
     "MaKVuc": 1 
 }
 
+###
+GET http://localhost:5000/api/phantom/tai-xe
+
 
 
 
