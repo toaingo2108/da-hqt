@@ -1,7 +1,5 @@
-import axios from 'axios'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap'
-import { apiUrl } from '../../context/contants'
 import { PhantomContext } from '../../context/phantom'
 
 const ThemKhuVucTaiXeModal = () => {
