@@ -4,7 +4,7 @@ const router = express.Router()
 const sql = require('mssql')
 const config = require('../config')
 
-router.delete('/xoa-tai-xe/:MaTXe', async (req, res) => {
+router.delete('/xoa-tai-xe-error/:MaTXe', async (req, res) => {
     const MaTXe = req.params.MaTXe
     try {
         let pool = await sql.connect(config)
