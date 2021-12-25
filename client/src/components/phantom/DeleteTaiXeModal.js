@@ -8,6 +8,7 @@ const DeleteTaiXeModal = () => {
         showDelete,
         setShowDelete,
         xoaTaiXe,
+        xoaTaiXe_error,
     } = useContext(PhantomContext)
 
     const [isError, setIsError] = useState(false)
@@ -18,9 +19,11 @@ const DeleteTaiXeModal = () => {
         event.preventDefault()
         if (isError) {
             console.log('xoaTaiXe_error')
-            // await xoaTaiXe_error()
+            const { message } = await xoaTaiXe_error({ MaTXe: taiXe.MaTXe })
+            alert(message)
         } else {
-            await xoaTaiXe({ MaTXe: taiXe.MaTXe })
+            const { message } = await xoaTaiXe({ MaTXe: taiXe.MaTXe })
+            alert(message)
         }
         handleClose()
     }

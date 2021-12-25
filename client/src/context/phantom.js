@@ -19,6 +19,9 @@ const PhantomContextProvider = ({ children }) => {
     })
 
     const [showDelete, setShowDelete] = useState(false)
+    const [showAdd, setShowAdd] = useState(false)
+
+    const [DSKhuVuc, setDSKhuVuc] = useState([])
 
     const getAllTaiXe = async () => {
         try {
@@ -52,6 +55,56 @@ const PhantomContextProvider = ({ children }) => {
                     payload: MaTXe,
                 })
             }
+            return response.data
+        } catch (error) {
+            return error.response.data
+                ? error.response.data
+                : { success: false, message: 'Server error' }
+        }
+    }
+
+    const xoaTaiXe_error = async ({ MaTXe }) => {
+        try {
+            const response = await axios.delete(
+                `${apiUrl}/phantom/xoa-tai-xe-error/${MaTXe}`
+            )
+            if (response.data.success) {
+                dispatch({
+                    type: DELETE_TAIXE,
+                    payload: MaTXe,
+                })
+            }
+            return response.data
+        } catch (error) {
+            return error.response.data
+                ? error.response.data
+                : { success: false, message: 'Server error' }
+        }
+    }
+
+    const themKhuVucTaiXe = async (khuVucTX) => {
+        try {
+            const response = await axios.post(
+                `${apiUrl}/phantom/taixe-them-khuvuc`,
+                khuVucTX
+            )
+            return response.data
+        } catch (error) {
+            return error.response.data
+                ? error.response.data
+                : { success: false, message: 'Server error' }
+        }
+    }
+
+    const getDSTaiXeKhuVuc = async (MaTXe) => {
+        try {
+            const response = await axios.get(
+                `${apiUrl}/phantom/taixe-khuvuc/${MaTXe}`
+            )
+            if (response.data.success) {
+                setDSKhuVuc(response.data.DSTaiXe_KV)
+            }
+            return response.data
         } catch (error) {
             return error.response.data
                 ? error.response.data
@@ -64,8 +117,15 @@ const PhantomContextProvider = ({ children }) => {
         getAllTaiXe,
         findTaiXe,
         xoaTaiXe,
+        xoaTaiXe_error,
         showDelete,
         setShowDelete,
+        showAdd,
+        setShowAdd,
+        themKhuVucTaiXe,
+        getDSTaiXeKhuVuc,
+        DSKhuVuc,
+        setDSKhuVuc,
     }
     return (
         <PhantomContext.Provider value={phantomContextData}>

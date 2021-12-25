@@ -68,7 +68,10 @@ Content-Type: application/json
 PUT
 
 ### 
-DELETE http://localhost:5000/api/phantom/xoa-tai-xe/4
+DELETE http://localhost:5000/api/phantom/xoa-tai-xe/8
+
+### 
+DELETE http://localhost:5000/api/phantom/xoa-tai-xe-error/8
 
 
 ###
@@ -76,7 +79,7 @@ POST http://localhost:5000/api/phantom/taixe-them-khuvuc
 Content-Type: application/json
 
 {
-	"MaTXe": 4,
+	"MaTXe": 8,
     "MaKVuc": 1 
 }
 

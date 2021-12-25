@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Button, Col, Container, Modal, Row, Table } from 'react-bootstrap'
+import React, { useContext, useEffect } from 'react'
+import { Col, Container, Row, Table } from 'react-bootstrap'
 import { PhantomContext } from '../../context/phantom'
 import DeleteTaiXeModal from './DeleteTaiXeModal'
 import SingleTaiXe from './SingleTaiXe'
+import ThemKhuVucTaiXeModal from './ThemKhuVucTaiXeModal'
 
 const Phantom = () => {
     const {
@@ -41,6 +42,7 @@ const Phantom = () => {
                 </Col>
             </Row>
             {taiXe !== {} && <DeleteTaiXeModal />}
+            {taiXe !== {} && <ThemKhuVucTaiXeModal />}
         </Container>
     )
 }

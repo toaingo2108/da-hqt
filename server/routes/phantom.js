@@ -21,19 +21,36 @@ router.get('/tai-xe', async (req, res) => {
     }
 })
 
+router.get('/taixe-khuvuc/:MaTXe', async (req, res) => {
+    const MaTXe = req.params.MaTXe
+    try {
+        let pool = await sql.connect(config)
+        const DSTaiXe_KV = await pool
+            .request()
+            .query(`select * from TAIXE_KHUVUC where MaTXe = ${MaTXe}`)
+        res.json({
+            success: true,
+            DSTaiXe_KV: DSTaiXe_KV.recordset,
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            success: false,
+            message: 'Lỗi hệ thống',
+        })
+    }
+})
+
 router.delete('/xoa-tai-xe/:MaTXe', async (req, res) => {
     const MaTXe = req.params.MaTXe
     try {
         let pool = await sql.connect(config)
-        const taiXe = await pool
-            .request()
-            .query(`select * from TAIXE where MaTXe = ${MaTXe}`)
 
         const response = await pool
             .request()
-            .query(`delete TAIXE where MaTXe = ${MaTXe}`)
-        // .input('MaTXe', sql.Int, MaTXe)
-        // .execute('sp_XoaTaiXe')
+            .input('MaTXe', sql.Int, MaTXe)
+            .execute('sp_XoaTaiXe')
+
         if (response.returnValue) {
             res.status(400).json({
                 success: false,
@@ -43,7 +60,36 @@ router.delete('/xoa-tai-xe/:MaTXe', async (req, res) => {
             res.json({
                 success: true,
                 message: 'Thành công',
-                taiXe: taiXe.recordset,
+            })
+        }
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).json({
+            success: false,
+            message: 'Lỗi hệ thống',
+        })
+    }
+})
+
+router.delete('/xoa-tai-xe-error/:MaTXe', async (req, res) => {
+    const MaTXe = req.params.MaTXe
+    try {
+        let pool = await sql.connect(config)
+
+        const response = await pool
+            .request()
+            .input('MaTXe', sql.Int, MaTXe)
+            .execute('sp_XoaTaiXe_error')
+
+        if (response.returnValue) {
+            res.status(400).json({
+                success: false,
+                message: 'Thất bại',
+            })
+        } else {
+            res.json({
+                success: true,
+                message: 'Thành công',
             })
         }
     } catch (error) {
