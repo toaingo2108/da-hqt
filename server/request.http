@@ -109,10 +109,13 @@ GET http://localhost:5000/api/dirty-read/xem-ds-hanghoa-doitac-error/1
 GET http://localhost:5000/api/dirty-read/xem-ds-hanghoa-doitac/1
 
 
+###
+GET http://localhost:5000/api/unrepeatable-read/khu-vuc
+
 // RUN FIRST
 // Error
 ###
-GET http://localhost:5000/api/unrepeatable-read/xem-thongtin-chitiet-khuvuc-error/5
+GET http://localhost:5000/api/unrepeatable-read/xem-thongtin-chitiet-khuvuc-error/2
 
 // Fixed
 ###
@@ -121,11 +124,12 @@ GET http://localhost:5000/api/unrepeatable-read/xem-thongtin-chitiet-khuvuc/5
 
 // RUN SECOND
 ###
-POST http://localhost:5000/api/unrepeatable-read/thaydoi-khuvuc-taixe
+PUT http://localhost:5000/api/unrepeatable-read/thaydoi-khuvuc-taixe
 Content-Type: application/json
 
 {
-    "MaTXe": 1,
-    "MaKVucCu": 5,
-    "MaKVucMoi": 4
+    "MaTXe": 3,
+    "MaKVucCu": 1,
+    "MaKVucMoi": 2
 }
+

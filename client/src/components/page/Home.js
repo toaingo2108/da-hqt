@@ -24,6 +24,13 @@ const Home = () => {
                         Dirty Read
                     </Button>
                 </Col>
+                <Col>
+                    <Button
+                        size="lg"
+                        onClick={() => navigate('/unrepeatableRead')}>
+                        Unrepeatable Read
+                    </Button>
+                </Col>
             </Row>
         </Container>
     )

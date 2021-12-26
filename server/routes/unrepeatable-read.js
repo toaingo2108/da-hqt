@@ -3,6 +3,23 @@ const router = express.Router()
 const sql = require('mssql')
 const config = require('../config')
 
+router.get('/khu-vuc', async (req, res) => {
+    try {
+        let pool = await sql.connect(config)
+        const response = await pool.request().query('select * from KHUVUC')
+        res.json({
+            success: true,
+            DSKhuVuc: response.recordset,
+        })
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).json({
+            success: false,
+            message: 'Lỗi hệ thống',
+        })
+    }
+})
+
 router.get('/xem-thongtin-chitiet-khuvuc-error/:MaKVuc', async (req, res) => {
     const MaKVuc = req.params.MaKVuc
     try {
@@ -20,7 +37,7 @@ router.get('/xem-thongtin-chitiet-khuvuc-error/:MaKVuc', async (req, res) => {
             res.json({
                 success: true,
                 message: 'Thành công',
-                khuVuc: response.recordsets[0],
+                khuVuc: response.recordset[0],
                 DSTaiXe: response.recordsets[1],
             })
         }
@@ -50,7 +67,7 @@ router.get('/xem-thongtin-chitiet-khuvuc/:MaKVuc', async (req, res) => {
             res.json({
                 success: true,
                 message: 'Thành công',
-                khuVuc: response.recordsets[0],
+                khuVuc: response.recordset[0],
                 DSTaiXe: response.recordsets[1],
             })
         }
@@ -63,7 +80,7 @@ router.get('/xem-thongtin-chitiet-khuvuc/:MaKVuc', async (req, res) => {
     }
 })
 
-router.post('/thaydoi-khuvuc-taixe', async (req, res) => {
+router.put('/thaydoi-khuvuc-taixe', async (req, res) => {
     const { MaTXe, MaKVucCu, MaKVucMoi } = req.body
     try {
         let pool = await sql.connect(config)
