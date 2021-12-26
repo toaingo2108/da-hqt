@@ -113,6 +113,23 @@ Content-Type: application/json
     "MaCNhanh": 1
 }
 
+// RUN FIRST
+// Error
+###
+GET http://localhost:5000/api/unrepeatable-read/xem-thongtin-chitiet-khuvuc-error/5
+
+// Fixed
+###
+GET http://localhost:5000/api/unrepeatable-read/xem-thongtin-chitiet-khuvuc/5
 
 
+// RUN SECOND
+###
+POST http://localhost:5000/api/unrepeatable-read/thaydoi-khuvuc-taixe
+Content-Type: application/json
 
+{
+    "MaTXe": 1,
+    "MaKVucCu": 5,
+    "MaKVucMoi": 4
+}
