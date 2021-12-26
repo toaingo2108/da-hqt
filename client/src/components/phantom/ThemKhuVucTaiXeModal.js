@@ -21,8 +21,6 @@ const ThemKhuVucTaiXeModal = () => {
 
     const onSubmit = async (event) => {
         event.preventDefault()
-
-        console.log('themKhuVucTaiXe')
         const { message } = await themKhuVucTaiXe({
             MaTXe: taiXe.MaTXe,
             MaKVuc,
@@ -35,7 +33,7 @@ const ThemKhuVucTaiXeModal = () => {
         <>
             <Modal show={showAdd} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Thực hiện xóa tài xế </Modal.Title>
+                    <Modal.Title>Thêm khu vực tài xế </Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={onSubmit}>
                     <Modal.Body>

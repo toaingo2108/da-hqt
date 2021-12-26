@@ -21,7 +21,7 @@ router.get('/tai-xe', async (req, res) => {
 })
 
 router.get('/taixe-khuvuc/:MaTXe', async (req, res) => {
-    const MaTXe = MaTXe
+    const MaTXe = req.params.MaTXe
     try {
         let pool = await sql.connect(config)
         const DSTaiXe_KV = await pool.request()
