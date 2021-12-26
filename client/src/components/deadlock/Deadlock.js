@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { Button, Col, Container, Row, Table } from 'react-bootstrap'
+import { Col, Container, Row, Table } from 'react-bootstrap'
 import { UnrepeatableReadContext } from '../../context/unrepeatableRead'
 import SingleKhuVuc from '../deadlock/SingleKhuVuc'
 import ListTaiXeKhuVuc from './ListTaiXeKhuVuc'
