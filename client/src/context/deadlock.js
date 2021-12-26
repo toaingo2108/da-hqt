@@ -32,11 +32,10 @@ const DeadlockContextProvider = ({ children }) => {
     }
 
     const xoaTaiXeKhuVuc = async (data) => {
-        console.log(data)
         try {
             const response = await axios.delete(
                 `${apiUrl}/conversion-deadlock/xoa-taixe-khuvuc`,
-                data
+                { data }
             )
 
             console.log(response.data)
@@ -49,12 +48,13 @@ const DeadlockContextProvider = ({ children }) => {
     }
 
     const xoaTaiXeKhuVuc_error = async (data) => {
-        console.log(data)
         try {
             const response = await axios.delete(
                 `${apiUrl}/conversion-deadlock/xoa-taixe-khuvuc-error`,
-                data
+                { data }
             )
+
+            console.log(response.data)
             return response.data
         } catch (error) {
             return error.response.data

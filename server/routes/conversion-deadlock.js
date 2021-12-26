@@ -97,7 +97,7 @@ router.delete('/xoa-taixe-khuvuc', async (req, res) => {
         if (response.returnValue === 1) {
             res.status(400).json({
                 success: false,
-                message: 'Mã tài xế không tồn tại',
+                message: `Mã tài xế ${MaTXe} không tồn tại`,
             })
         } else if (response.returnValue === 2) {
             res.status(400).json({
