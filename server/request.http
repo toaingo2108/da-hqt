@@ -84,9 +84,12 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/api/phantom/tai-xe
 
+//////////////////////////////////////
+// Sau
 ###
 GET http://localhost:5000/api/dirty-read/xem-ds-hanghoa-doitac-error/1
 
+// Trước
 ###
 POST http://localhost:5000/api/dirty-read/them-hanghoa-vao-chinhanh-error
 Content-Type: application/json
@@ -97,6 +100,18 @@ Content-Type: application/json
     "MaCNhanh": 1
 }
 
+###
+GET http://localhost:5000/api/dirty-read/xem-ds-hanghoa-doitac/1
+
+###
+POST http://localhost:5000/api/dirty-read/them-hanghoa-vao-chinhanh
+Content-Type: application/json
+
+{
+    "MaHHoa": 6,
+    "SoLuongTon": 10,
+    "MaCNhanh": 1
+}
 
 
 
