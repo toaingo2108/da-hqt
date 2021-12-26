@@ -1,4 +1,3 @@
-const e = require('express')
 const express = require('express')
 const router = express.Router()
 const sql = require('mssql')
@@ -25,9 +24,9 @@ router.get('/taixe-khuvuc/:MaTXe', async (req, res) => {
     const MaTXe = req.params.MaTXe
     try {
         let pool = await sql.connect(config)
-        const DSTaiXe_KV = await pool
-            .request()
-            .query(`select * from TAIXE_KHUVUC where MaTXe = ${MaTXe}`)
+        const DSTaiXe_KV = await pool.request()
+            .query(`select kv.* from TAIXE_KHUVUC txkv, KhuVuc kv
+            where txkv.MaTXe = ${MaTXe} and txkv.MaKVuc = kv.MaKVuc `)
         res.json({
             success: true,
             DSTaiXe_KV: DSTaiXe_KV.recordset,
