@@ -14,9 +14,9 @@ app.use(cors())
 
 // use Router
 app.use('/api/phantom', phantomRouter)
-app.use('/api', router)
 app.use('/api/dirty-read', dirtyReadRouter)
 app.use('/api/unrepeatable-read', unrepeatableReadRouter)
+app.use('/api', router)
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
