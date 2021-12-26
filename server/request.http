@@ -133,3 +133,29 @@ Content-Type: application/json
     "MaKVucMoi": 2
 }
 
+// ERROR
+###
+DELETE  http://localhost:5000/api/conversion-deadlock/xoa-taixe-khuvuc-error
+Content-Type: application/json
+
+{
+    "MaTXe": 1,
+    "MaKVuc": 1
+}
+
+###
+DELETE http://localhost:5000/api/conversion-deadlock/xoa-tatca-taixe-cua-khuvuc-error/1
+
+
+// FIXED
+###
+DELETE http://localhost:5000/api/conversion-deadlock/xoa-taixe-khuvuc
+Content-Type: application/json
+
+{
+    "MaTXe": 1,
+    "MaKVuc": 1
+}
+
+###
+DELETE http://localhost:5000/api/conversion-deadlock/xoa-tatca-taixe-cua-khuvuc/1
