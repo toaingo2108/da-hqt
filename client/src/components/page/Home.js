@@ -18,6 +18,13 @@ const Home = () => {
                     </Button>
                 </Col>
             </Row>
+            <Row className="my-5">
+                <Col>
+                    <Button size="lg" onClick={() => navigate('/dirtyRead')}>
+                        Dirty Read
+                    </Button>
+                </Col>
+            </Row>
         </Container>
     )
 }
