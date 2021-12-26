@@ -153,7 +153,7 @@ DELETE http://localhost:5000/api/conversion-deadlock/xoa-taixe-khuvuc
 Content-Type: application/json
 
 {
-    "MaTXe": 1,
+    "MaTXe": 3,
     "MaKVuc": 1
 }
 

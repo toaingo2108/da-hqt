@@ -32,6 +32,13 @@ const Home = () => {
                     </Button>
                 </Col>
             </Row>
+            <Row className="my-5">
+                <Col>
+                    <Button size="lg" onClick={() => navigate('/deadlock')}>
+                        Conversion deadlock (Chưa code xong)
+                    </Button>
+                </Col>
+            </Row>
         </Container>
     )
 }

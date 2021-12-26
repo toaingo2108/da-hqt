@@ -6,7 +6,7 @@ const router = require('./routes')
 const phantomRouter = require('./routes/phantom')
 const dirtyReadRouter = require('./routes/dirty-read')
 const unrepeatableReadRouter = require('./routes/unrepeatable-read')
-const conversionDeadlockRounter = require('./routes/conversion-deadlock')
+const conversionDeadlockRouter = require('./routes/conversion-deadlock')
 
 const app = express()
 
@@ -17,8 +17,8 @@ app.use(cors())
 app.use('/api/phantom', phantomRouter)
 app.use('/api/dirty-read', dirtyReadRouter)
 app.use('/api/unrepeatable-read', unrepeatableReadRouter)
+app.use('/api/conversion-deadlock', conversionDeadlockRouter)
 app.use('/api', router)
-app.use('/api/conversion-deadlock', conversionDeadlockRounter)
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
