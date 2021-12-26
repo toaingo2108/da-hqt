@@ -46,12 +46,10 @@ GET http://localhost:5000/api/hop-dong
 #######################'
 
 ###
-GET http://localhost:5000/api/phantom/home
+GET http://localhost:5000/api/phantom/taixe-khuvuc/8
 Content-Type: application/json
 
-{
-    "Name": "Phạm Minh Trí"
-}
+
 
 
 ###
@@ -68,7 +66,10 @@ Content-Type: application/json
 PUT
 
 ### 
-DELETE http://localhost:5000/api/phantom/xoa-tai-xe-error-/4
+DELETE http://localhost:5000/api/phantom/xoa-tai-xe/8
+
+### 
+DELETE http://localhost:5000/api/phantom/xoa-tai-xe-error/8
 
 
 ###
@@ -76,8 +77,24 @@ POST http://localhost:5000/api/phantom/taixe-them-khuvuc
 Content-Type: application/json
 
 {
-	"MaTXe": 4,
+	"MaTXe": 8,
     "MaKVuc": 1 
+}
+
+###
+GET http://localhost:5000/api/phantom/tai-xe
+
+###
+GET http://localhost:5000/api/dirty-read/xem-ds-hanghoa-doitac-error/1
+
+###
+POST http://localhost:5000/api/dirty-read/them-hanghoa-vao-chinhanh-error
+Content-Type: application/json
+
+{
+    "MaHHoa": 6,
+    "SoLuongTon": 10,
+    "MaCNhanh": 1
 }
 
 

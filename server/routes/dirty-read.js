@@ -1,56 +1,16 @@
-const e = require('express')
 const express = require('express')
 const router = express.Router()
 const sql = require('mssql')
 const config = require('../config')
 
-router.get('/tai-xe', async (req, res) => {
+router.get('/xem-ds-hanghoa-doitac-error/:MaDTac', async (req, res) => {
+    const MaDTac = req.params.MaDTac
     try {
         let pool = await sql.connect(config)
-        const DSTaiXe = await pool.request().query('select * from TAIXE')
-        res.json({
-            success: true,
-            DSTaiXe: DSTaiXe.recordset,
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            success: false,
-            message: 'Lỗi hệ thống',
-        })
-    }
-})
-
-router.get('/taixe-khuvuc/:MaTXe', async (req, res) => {
-    const MaTXe = MaTXe
-    try {
-        let pool = await sql.connect(config)
-        const DSTaiXe_KV = await pool
+        let response = await pool
             .request()
-            .query(`select * from TAIXE_KHUVUC where MaTXe = ${MaTXe}`)
-        res.json({
-            success: true,
-            DSTaiXe_KV: DSTaiXe_KV.recordset,
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            success: false,
-            message: 'Lỗi hệ thống',
-        })
-    }
-})
-
-router.delete('/xoa-tai-xe/:MaTXe', async (req, res) => {
-    const MaTXe = req.params.MaTXe
-    try {
-        let pool = await sql.connect(config)
-
-        const response = await pool
-            .request()
-            .input('MaTXe', sql.Int, MaTXe)
-            .execute('sp_XoaTaiXe')
-
+            .input('MaDTac', sql.Int, MaDTac)
+            .execute('USP_Dirty_Cau14')
         if (response.returnValue) {
             res.status(400).json({
                 success: false,
@@ -60,6 +20,7 @@ router.delete('/xoa-tai-xe/:MaTXe', async (req, res) => {
             res.json({
                 success: true,
                 message: 'Thành công',
+                DsHHoa: response.recordset,
             })
         }
     } catch (error) {
@@ -71,17 +32,17 @@ router.delete('/xoa-tai-xe/:MaTXe', async (req, res) => {
     }
 })
 
-router.delete('/xoa-tai-xe-error/:MaTXe', async (req, res) => {
-    const MaTXe = req.params.MaTXe
+router.post('/them-hanghoa-vao-chinhanh-error', async (req, res) => {
+    const { MaHHoa, SoLuongTon, MaCNhanh } = req.body
     try {
         let pool = await sql.connect(config)
-
         const response = await pool
             .request()
-            .input('MaTXe', sql.Int, MaTXe)
-            .execute('sp_XoaTaiXe_error')
-
-        if (response.returnValue) {
+            .input('MaHHoa', sql.Int, MaHHoa)
+            .input('SoLuongTon', sql.Int, SoLuongTon)
+            .input('MaCNhanh', sql.Int, MaCNhanh)
+            .execute('usp_Dirty_Cau25_2')
+        if (response.returnValue === 1) {
             res.status(400).json({
                 success: false,
                 message: 'Thất bại',
@@ -90,6 +51,11 @@ router.delete('/xoa-tai-xe-error/:MaTXe', async (req, res) => {
             res.json({
                 success: true,
                 message: 'Thành công',
+                reusults: {
+                    MaHHoa,
+                    SoLuongTon,
+                    MaCNhanh,
+                },
             })
         }
     } catch (error) {
@@ -101,15 +67,14 @@ router.delete('/xoa-tai-xe-error/:MaTXe', async (req, res) => {
     }
 })
 
-router.post('/taixe-them-khuvuc', async (req, res) => {
-    const { MaTXe, MaKVuc } = req.body
+router.get('/xem-ds-hanghoa-doitac/:MaDTac', async (req, res) => {
+    const MaDTac = req.params.MaDTac
     try {
         let pool = await sql.connect(config)
-        const response = await pool
+        let response = await pool
             .request()
-            .input('MaTXe', sql.Int, MaTXe)
-            .input('MaKVuc', sql.Int, MaKVuc)
-            .execute('usp_TaiXeThemKVucHoatDong')
+            .input('MaDTac', sql.Int, MaDTac)
+            .execute('USP_Dirty_Fix_Cau14')
         if (response.returnValue) {
             res.status(400).json({
                 success: false,
@@ -119,9 +84,41 @@ router.post('/taixe-them-khuvuc', async (req, res) => {
             res.json({
                 success: true,
                 message: 'Thành công',
-                results: {
-                    MaTXe,
-                    MaKVuc,
+                DsHHoa: response.recordset,
+            })
+        }
+    } catch (error) {
+        console.log(error.message)
+        res.status(500).json({
+            success: false,
+            message: 'Lỗi hệ thống',
+        })
+    }
+})
+
+router.post('/them-hanghoa-vao-chinhanh', async (req, res) => {
+    const { MaHHoa, SoLuongTon, MaCNhanh } = req.body
+    try {
+        let pool = await sql.connect(config)
+        const response = await pool
+            .request()
+            .input('MaHHoa', sql.Int, MaHHoa)
+            .input('SoLuongTon', sql.Int, SoLuongTon)
+            .input('MaCNhanh', sql.Int, MaCNhanh)
+            .execute('usp_Dirty_Fix_Cau25_2')
+        if (response.returnValue === 1) {
+            res.status(400).json({
+                success: false,
+                message: 'Thất bại',
+            })
+        } else {
+            res.json({
+                success: true,
+                message: 'Thành công',
+                reusults: {
+                    MaHHoa,
+                    SoLuongTon,
+                    MaCNhanh,
                 },
             })
         }
