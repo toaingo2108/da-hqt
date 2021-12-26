@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { Button, Col, Form, Modal, Row } from 'react-bootstrap'
+import { Button, Form, Modal, Row, Table } from 'react-bootstrap'
 import { PhantomContext } from '../../context/phantom'
 
 const ThemKhuVucTaiXeModal = () => {
@@ -13,8 +13,6 @@ const ThemKhuVucTaiXeModal = () => {
     } = useContext(PhantomContext)
 
     const [MaKVuc, setMaKVuc] = useState('')
-
-    console.log(DSKhuVuc)
 
     const handleClose = () => {
         setShowAdd(false)
@@ -41,20 +39,6 @@ const ThemKhuVucTaiXeModal = () => {
                 </Modal.Header>
                 <Form onSubmit={onSubmit}>
                     <Modal.Body>
-                        <Row className="mb-2">
-                            {DSKhuVuc.length !== 0 ? (
-                                <>
-                                    <span>Danh sách khu vực đã đăng ký</span>
-                                    {DSKhuVuc.map((item, index) => (
-                                        <Col xs={6} key={index}>
-                                            {item.MaKVuc}
-                                        </Col>
-                                    ))}
-                                </>
-                            ) : (
-                                <span>Chưa đăng ký khu vực</span>
-                            )}
-                        </Row>
                         <Form.Group>
                             <Form.Control
                                 type="text"
@@ -85,6 +69,33 @@ const ThemKhuVucTaiXeModal = () => {
                         <Button type="submit" variant="primary">
                             Thêm
                         </Button>
+                        <Row className="mb-2">
+                            {DSKhuVuc.length !== 0 ? (
+                                <>
+                                    <span>Danh sách khu vực đã đăng ký</span>
+                                    <Table striped bordered hover>
+                                        <thead>
+                                            <tr>
+                                                <th>MaKVuc</th>
+                                                <th>Tỉnh</th>
+                                                <th>Huyện</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {DSKhuVuc.map((item, index) => (
+                                                <tr key={index}>
+                                                    <td>{item.MaKVuc}</td>
+                                                    <td>{item.Huyen}</td>
+                                                    <td>{item.Tinh}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </Table>
+                                </>
+                            ) : (
+                                <span>Chưa đăng ký khu vực</span>
+                            )}
+                        </Row>
                     </Modal.Footer>
                 </Form>
             </Modal>

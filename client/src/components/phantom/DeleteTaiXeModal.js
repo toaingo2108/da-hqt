@@ -19,7 +19,9 @@ const DeleteTaiXeModal = () => {
         event.preventDefault()
         if (isError) {
             console.log('xoaTaiXe_error')
-            const { message } = await xoaTaiXe_error({ MaTXe: taiXe.MaTXe })
+            const { message } = await xoaTaiXe_error({
+                MaTXe: taiXe.MaTXe,
+            })
             alert(message)
         } else {
             const { message } = await xoaTaiXe({ MaTXe: taiXe.MaTXe })
